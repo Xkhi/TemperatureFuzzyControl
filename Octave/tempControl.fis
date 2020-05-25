@@ -1,0 +1,59 @@
+[System]
+Name='Temp_Control'
+Type='mamdani'
+Version=1.0
+NumInputs=2
+NumOutputs=2
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='TempErr'
+Range=[-5 5]
+NumMFs=3
+MF1='Frio':'trapmf',[-6 -5 -2 0]
+MF2='Neutro':'trapmf',[-2 0 0 2]
+MF3='Caliente':'trapmf',[0 2 5 6]
+
+[Input2]
+Name='TempErrDev'
+Range=[-5 5]
+NumMFs=3
+MF1='Enfriando':'trapmf',[-6 -5 -2 0]
+MF2='Neutro':'trapmf',[-2 0 0 2]
+MF3='Calentando':'trapmf',[0 2 5 6]
+
+[Output1]
+Name='Ventilador'
+Range=[0 100]
+NumMFs=5
+MF1='MuyBajo':'trapmf',[-1 0 10 25]
+MF2='Bajo':'trapmf',[10 25 25 50]
+MF3='Medio':'trapmf',[25 50 50 75]
+MF4='Alto':'trapmf',[50 75 75 90]
+MF5='MuyAlto':'trapmf',[75 90 100 101]
+
+[Output2]
+Name='Calentador'
+Range=[0 100]
+NumMFs=5
+MF1='MuyBajo':'trapmf',[-1 0 10 25]
+MF2='Bajo':'trapmf',[10 25 25 50]
+MF3='Medio':'trapmf',[25 50 50 75]
+MF4='Alto':'trapmf',[50 75 75 90]
+MF5='MuyAlto':'trapmf',[75 90 100 101]
+
+[Rules]
+1 1, 1 5 (1) : 1
+1 2, 2 4 (1) : 1
+1 3, 3 3 (1) : 1
+2 1, 1 4 (1) : 1
+2 2, 3 3 (1) : 1
+2 3, 4 1 (1) : 1
+3 1, 3 3 (1) : 1
+3 2, 4 2 (1) : 1
+3 3, 5 1 (1) : 1
